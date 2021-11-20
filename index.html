@@ -4,30 +4,35 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <title>Vacation Planner - National Parks</title>
 </head>
 <body>
 
     <header>
-        <h1>Vacation Planner for National Parks</h1>
-        <p>This section will tell us about what this site does. </p>
+        <h1 class="bg-green-600 text-center text-4xl">Vacation Planner for National Parks</h1>
+        <p class="text-center bg-blue-200">This section will tell us about what this site does. </p>
     </header>
 
-    <section>
-        <form class="form" id="location">
+    <section class="flex container">
+       <section>
+        <form class="form bg-blue-50" id="location">
+            <h3>Please enter your location:</h3>
             <input type="text" id="location-input" placeholder="City and state">
+            <br>
             <input type="checkbox" id="park-checkmark" name="park" value="park">
             <label for="park">Park</label>
             <input type="checkbox" id="dining-checkmark" name="dining" value="dining">
             <label for="dining">Dining</label>
             <input type="checkbox" id="lodging-checkmark" name="lodging" value="lodging">
             <label for="lodging">Lodging</label>
+            <br>
             <button type="submit">Submit</button>
 
-        </form>
-    </section>
+            </form>
+        </section>
 
-    <section>
+     <section class="flex m-0">
         <h2>Itinerary</h2>
         <h3>Park</h3>
         <ul id="park-list" class="list-container">
@@ -41,7 +46,9 @@
         <ul id="lodging-list" class="list-container">
             <li class="list-items">list will go here. </li>
         </ul>
+        </section> 
     </section>
+
 
     <footer>Made by The Trail Lad's! &copy2021</footer>
 
