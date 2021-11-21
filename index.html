@@ -7,42 +7,46 @@
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <title>Vacation Planner - National Parks</title>
 </head>
-<body>
+<body class="font-serif bg-blue-100">
 
     <header>
-        <h1 class="bg-green-600 text-center text-4xl">Vacation Planner for National Parks</h1>
-        <p class="text-center bg-blue-200">This section will tell us about what this site does. </p>
+        <h1 class="bg-green-600 text-center text-5xl">Vacation Planner for National Parks</h1>
+        <p class="text-center bg-blue-200 text-2xl">This section will tell us about what this site does. </p>
     </header>
 
-    <section class="flex container">
-       <section>
-        <form class="form bg-blue-50" id="location">
-            <h3>Please enter your location:</h3>
-            <input type="text" id="location-input" placeholder="City and state">
+    <section class="flex container justify-around m-6">
+       <section class="w-2/4 mr-8 border-2">
+        <form class="form bg-blue-50 p-2" id="location">
+            <h3 class="text-2xl font-bold m-1">Please enter your location:</h3>
+            <input class="text-2xl m-1" type="text" id="location-input" placeholder="City and state">
             <br>
             <input type="checkbox" id="park-checkmark" name="park" value="park">
-            <label for="park">Park</label>
-            <input type="checkbox" id="dining-checkmark" name="dining" value="dining">
-            <label for="dining">Dining</label>
-            <input type="checkbox" id="lodging-checkmark" name="lodging" value="lodging">
-            <label for="lodging">Lodging</label>
+            <label class="text-2xl m-1" for="park">Park</label>
             <br>
-            <button type="submit">Submit</button>
+            <input type="checkbox" id="dining-checkmark" name="dining" value="dining">
+            <label class="text-2xl m-1" for="dining">Dining</label>
+            <br>
+            <input type="checkbox" id="lodging-checkmark" name="lodging" value="lodging">
+
+            <label class="text-2xl m-1" for="lodging">Lodging</label>
+            <br>
+            <button class="bg-gray-400 m-2 rounded p-2 font-semibold" type="submit">Submit</button>
 
             </form>
         </section>
 
-     <section class="flex m-0">
-        <h2>Itinerary</h2>
-        <h3>Park</h3>
+     <section class="flex-col border-2 m-0 w-2/4 p-3 bg-blue-50 ml-8">
+        <h3 class="text-3xl font-bold">Itinerary</h3>
+        <h3 class="text-2xl">Park</h3>
+
         <ul id="park-list" class="list-container">
             <li class="list-items">list will go here. </li>
         </ul>
-        <h3>Dining</h3>
+        <h3 class="text-2xl">Dining</h3>
         <ul id="dining-list" class="list-container">
             <li class="list-items">list will go here. </li>
         </ul>
-        <h3>Lodging</h3>
+        <h3 class="text-2xl">Lodging</h3>
         <ul id="lodging-list" class="list-container">
             <li class="list-items">list will go here. </li>
         </ul>
@@ -50,7 +54,8 @@
     </section>
 
 
-    <footer>Made by The Trail Lad's! &copy2021</footer>
+    <footer class="fixed bottom-0 bg-green-600 w-screen text-center">Made by The Trail Lad's! &copy2021</footer>
+
 
     <script src="./assets/js/script.js"></script>
     
