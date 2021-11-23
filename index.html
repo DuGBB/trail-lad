@@ -5,20 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <title>Vacation Planner - National Parks</title>
+    <title>National Parks Vacation Planner</title>
 </head>
-<body class="font-serif bg-blue-100">
+<body class="font-serif bg-blue-100 ">
 
     <header>
-        <h1 class="bg-green-600 text-center text-5xl">Vacation Planner for National Parks</h1>
-        <p class="text-center bg-blue-200 text-2xl">This section will tell us about what this site does. </p>
+        <h1 class="bg-green-600 text-center text-5xl p-2">Vacation Planner for National Parks</h1>
+        <p class="text-center bg-blue-200 text-2xl p-1">This section will tell us about what this site does. </p>
     </header>
 
     <section class="flex container justify-around m-6">
-       <section class="w-2/4 mr-8 border-2">
-        <form class="form bg-blue-50 p-2" id="location">
+       <section class="w-2/4 mr-8 border-2 grid">
+        <form class="form bg-blue-50 p-2 rounded-lg" id="location">
             <h3 class="text-2xl font-bold m-1">Please enter your location:</h3>
-            <input class="text-2xl m-1" type="text" id="location-input" placeholder="City and state">
+            <input class="text-2xl m-2" type="text" id="location-input" placeholder="City and state">
             <br>
             <input type="checkbox" id="park-checkmark" name="park" value="park">
             <label class="text-2xl m-1" for="park">Park</label>
@@ -34,7 +34,8 @@
             </form>
         </section>
 
-     <section class="flex-col border-2 m-0 w-2/4 p-3 bg-blue-50 ml-8">
+
+     <section class="flex-col border-2 m-0 w-2/4 p-3 bg-blue-50 ml-8 rounded-lg">
         <h3 class="text-3xl font-bold">Itinerary</h3>
         <h3 class="text-2xl">Park</h3>
         <ul id="park-list" class="list-container">
