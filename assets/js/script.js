@@ -4,7 +4,7 @@ var formHandlerEl = function(event) {
     // run api call next
 
     var parksApiUrl = "https://developer.nps.gov/api/v1/parks?limit=50&start=0&q=" + cityStateInputEl + "&api_key=xG0N7G0NIR00rad6uzGstrePJgkPJ12OyeOMTr9q";
-    var foodApiUrl = "https://api.documenu.com/v2/restaurants/zip_code/35645?&key=0d461c352166be6cd4a1a1e0925996b4";
+    var foodApiUrl = "https://api.documenu.com/v2/restaurants/zip_code/35404?&key=0d461c352166be6cd4a1a1e0925996b4&size=10";
     
     //grabbing users search input
     var searchLocation = document.getElementById("location-input").value;
@@ -43,16 +43,7 @@ var formHandlerEl = function(event) {
         if(response.ok) {
             response.json().then(function(data) {
                 console.log(data);
-              /*  for (i = 0; i < 4; i++) {
-                    var lon = data.data[i].longitude;
-                    var lat = data.data[i].latitude;
-                    var name = data.data[i].name;
-                    var descrip = data.data[i].description;
-                   var parkNames = document.getElementById("park-list");
-                   var parkNameList = document.createElement("div");
-                   parkNameList.textContent = name;
-                   parkNames.appendChild(parkNameList);
-                }*/
+                displayFoodData(data);
              })
         }
 
@@ -63,6 +54,21 @@ var formHandlerEl = function(event) {
     // display results in appropriate list
 
 }
+
+function displayFoodData(foodData) {
+    for (i = 0; i < foodData.data.length; i++) {
+        let name = foodData.data[i].restaurant_name;
+        let address = foodData.data[i].address.formatted;
+        let number = foodData.data[i].restaurant_phone;
+        let webSite = foodData.data[i].restaurant_website;
+        let descrip = foodData.data[i].cuisines;
+       console.log(name);
+       console.log(address);
+       console.log(number);
+       console.log(webSite);
+       console.log(descrip);
+       console.log("================================");
+}}
 
 // if (document.getElementById("park-checkmark").checked = true) {
 //     console.log(cityStateInputEl)
