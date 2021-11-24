@@ -43,35 +43,34 @@ var formHandlerEl = function(event) {
         if(response.ok) {
             response.json().then(function(data) {
                 console.log(data);
-                displayFoodData(data);
+                displayFoodData(data);//called display function
              })
         }
 
     });
-
-    // when data comes in save in localStorage
-
-    // display results in appropriate list
-
 }
 
-function displayFoodData(foodData) {
-    for (i = 0; i < foodData.data.length; i++) {
+function displayFoodData(foodData) {//created function to display restaurant data to page
+    var oldDiningList = document.getElementById("dining-list");//grabbing existing element
+    var newDiningList = document.createElement("ul");//creating new element
+    newDiningList.setAttribute("id", "dining-list");
+    newDiningList.setAttribute("class", "list-container");
+    for (i = 0; i < foodData.data.length; i++) {//displaying individual restaurant data
         let name = foodData.data[i].restaurant_name;
         let address = foodData.data[i].address.formatted;
         let number = foodData.data[i].restaurant_phone;
         let webSite = foodData.data[i].restaurant_website;
         let descrip = foodData.data[i].cuisines;
-       console.log(name);
-       console.log(address);
-       console.log(number);
-       console.log(webSite);
-       console.log(descrip);
-       console.log("================================");
-}}
+        let infoDiv = document.createElement("div");
+        infoDiv.innerHTML = name + "<br>" + address + "<br>" + number + "<br>" + webSite + "<br>" + descrip;
+        let listItem = document.createElement("li");
+        listItem.setAttribute("class", "list-items");
+        listItem.appendChild(infoDiv);
+        newDiningList.appendChild(listItem);
 
-// if (document.getElementById("park-checkmark").checked = true) {
-//     console.log(cityStateInputEl)
-// }
+}
+    oldDiningList.parentElement.replaceChild(newDiningList, oldDiningList);//replacing existing element with new element
+}
+
 
 document.getElementById("location").addEventListener("submit", formHandlerEl);
