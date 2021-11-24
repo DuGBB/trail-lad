@@ -4,44 +4,123 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href=".//assets/css/style.css" rel="stylesheet">
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <title>National Parks Vacation Planner</title>
 </head>
-<body class="font-serif bg-blue-100 ">
+<body class="font-serif">
 
     <header>
         <h1 class="bg-green-600 text-center text-5xl p-2">Vacation Planner for National Parks</h1>
         <p class="text-center bg-blue-200 text-2xl p-1">This section will tell us about what this site does. </p>
     </header>
 
-    <section class="flex container justify-around m-6">
-       <section class="w-100 mr-8 border-2  md:w-2/4">
-        <form class="form bg-blue-50 p-2 rounded-lg" id="location">
-            <h3 class="text-2xl font-bold m-1">Please enter your location:</h3>
-            <input class="text-2xl m-2" type="text" id="location-input" placeholder="City and state">
-            <br>
-            <input type="checkbox" id="park-checkmark" name="park" value="park">
+    <div class="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12 bg-center bg-cover" style="background-image: url('./assets/nps-background.png')">
+        <div class="relative py-3 sm:max-w-xl sm:mx-auto">
+          <div class="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20 bg-clip-padding bg-opacity-60 border border-gray-200" style="backdrop-filter: blur(20px);">
+            <div class="max-w-md mx-auto">
+      
+              <div class="divide-y divide-gray-200">
+                <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+                  <p class="font-semibold text-2xl">Please enter your location:</p>
+                  <input class="text-2xl m-2" type="text" id="location-input" placeholder="City and state">
+                  <br>
+                  <ul class="list-disc space-y-2">
+                    <li class="flex items-start">
+                      <span class="h-6 flex items-center sm:h-7">
+                          <input type="checkbox" class="flex-shrink-0 h-5 w-5 text-cyan-500" viewBox="0 0 20 20" fill="currentColor" id="park-checkmark">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                          </input>
+                      </span>
+                      <p class="ml-2">
+                        Park
+                      </p>
+                    </li>
+                    <li class="flex items-start">
+                      <span class="h-6 flex items-center sm:h-7">
+                        <input type="checkbox" class="flex-shrink-0 h-5 w-5 text-cyan-500" viewBox="0 0 20 20" fill="currentColor" id="dining-checkmark">
+                          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                        </input>
+                      </span>
+                      <p class="ml-2">
+                        Dining
+                      </p>
+                    </li>
+                    <li class="flex items-start">
+                      <span class="h-6 flex items-center sm:h-7">
+                        <input type="checkbox" class="flex-shrink-0 h-5 w-5 text-cyan-500" viewBox="0 0 20 20" fill="currentColor" id="lodging-checkmark">
+                          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                        </input>
+                      </span>
+                      <p class="ml-2">Lodging</p>
+                    </li>
+                  </ul>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit obcaecati qui porro, tenetur illo quam minus tempora delectus mollitia nisi ipsa culpa facere, dignissimos id cum recusandae possimus saepe molestias.</p>
+                </div>
+                <div class="pt-6 text-base leading-6 font-bold sm:text-lg sm:leading-7">
+                    <button class="bg-gray-400 m-2 rounded p-2 font-semibold" type="submit">Submit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- SECOND BOX BEGINS BELOW -->
+
+        <div class="relative py-3 sm:max-w-xl sm:mx-auto">
+          <div class="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20 bg-clip-padding bg-opacity-60 border border-gray-200" style="backdrop-filter: blur(20px);">
+            <div class="max-w-md mx-auto">
+      
+              <div class="divide-y divide-gray-200">
+                <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+                  <h2 class="font-semibold text-2xl">Itinerary</h2>
+                  <h2 class="font-semibold">Park</h2>
+                  <ul id="park-list" class="list-container">
+                    <li class="list-items italic">Yellowstone National Park:</li><span id="park-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse illum delectus cumque placeat voluptates, quam iure minus aspernatur perferendis illo. Doloribus qui, eligendi praesentium aspernatur veniam at quod ab consectetur? </span>
+                  </ul>
+                  <h2 class="font-semibold">Dining</h2>
+                  <ul id="dining-list" class="list-container">
+                    <li class="list-items italic">Restaurant Name</li>
+                  </ul>
+                  <h2 class="font-semibold">Lodging</h2>
+                  <ul id="lodging-list" class="list-container">
+                    <li class="list-items italic">Hampton Inn</li>
+                  </ul>                  
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+
+    <!-- <section class="min-h-screen bg-gray-100 py-6 flex flex-col container justify-between sm:py-12 m-6 main-body">
+       <section class="relative py-3 sm:max-w-xl sm:mx-auto w-100 mr-8 border-2  md:w-2/4">
+        <form class="relative px-4 form bg-blue-50 p-2 rounded-lg" id="location"> -->
+            
+            <!-- <input type="checkbox" id="park-checkmark" name="park" value="park">
             <label class="text-2xl m-1" for="park">Park</label>
-            <br>
-            <input type="checkbox" id="dining-checkmark" name="dining" value="dining">
+            <br> -->
+            <!-- <input type="checkbox" id="dining-checkmark" name="dining" value="dining">
             <label class="text-2xl m-1" for="dining">Dining</label>
-            <br>
-            <input type="checkbox" id="lodging-checkmark" name="lodging" value="lodging">
+            <br> -->
+            <!-- <input type="checkbox" id="lodging-checkmark" name="lodging" value="lodging">
 
             <label class="text-2xl m-1" for="lodging">Lodging</label>
-            <br>
-            <button class="bg-gray-400 m-2 rounded p-2 font-semibold" type="submit">Submit</button>
+            <br> -->
+            <!-- <button class="bg-gray-400 m-2 rounded p-2 font-semibold" type="submit">Submit</button>
 
             </form>
-        </section>
+        </section> -->
 
 
-     <section class="flex-col border-2 m-0 w-2/4 p-3 bg-blue-50 ml-8 rounded-lg md:w-100">
+     <!-- <section class="flex-col border-2 m-0 w-2/4 p-3 bg-blue-50 ml-8 rounded-lg md:w-100">
         <h3 class="text-3xl font-bold">Itinerary</h3>
         <h3 class="text-2xl">Park</h3>
 
         <ul id="park-list" class="list-container">
-            <li class="list-items">list will go here. </li>
+            <li class="list-items">Yellowstone National Park:<span id="park-description"> Description of park will go here.</span> </li>
         </ul>
         <h3 class="text-2xl">Dining</h3>
         <ul id="dining-list" class="list-container">
@@ -52,7 +131,7 @@
             <li class="list-items">list will go here. </li>
         </ul>
         </section> 
-    </section>
+    </section> -->
 
 
     <footer class="fixed bottom-0 bg-green-600 w-screen text-center">Made by The Trail Lad's! &copy2021</footer>
