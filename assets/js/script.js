@@ -4,7 +4,7 @@ var formHandlerEl = function(event) {
     // run api call next
 
     var parksApiUrl = "https://developer.nps.gov/api/v1/parks?limit=50&start=0&q=" + cityStateInputEl + "&api_key=xG0N7G0NIR00rad6uzGstrePJgkPJ12OyeOMTr9q";
-    var foodApiUrl = "https://api.documenu.com/v2/restaurants/search/fields?state=" + cityStateInputEl + "&key=0d461c352166be6cd4a1a1e0925996b4";
+    var foodApiUrl = "https://api.documenu.com/v2/restaurants/zip_code/35645?&key=0d461c352166be6cd4a1a1e0925996b4";
     
     //grabbing users search input
     var searchLocation = document.getElementById("location-input").value;
@@ -22,6 +22,8 @@ var formHandlerEl = function(event) {
             response.json().then(function(data) {
                 console.log(data.data);
                 for (i = 0; i < 4; i++) {
+                    var zipCode = data.data[i].addresses[0].postalcode;
+                    console.log(zipCode)
                     var lon = data.data[i].longitude;
                     var lat = data.data[i].latitude;
                     var name = data.data[i].name;
@@ -41,7 +43,17 @@ var formHandlerEl = function(event) {
         if(response.ok) {
             response.json().then(function(data) {
                 console.log(data);
-            })
+              /*  for (i = 0; i < 4; i++) {
+                    var lon = data.data[i].longitude;
+                    var lat = data.data[i].latitude;
+                    var name = data.data[i].name;
+                    var descrip = data.data[i].description;
+                   var parkNames = document.getElementById("park-list");
+                   var parkNameList = document.createElement("div");
+                   parkNameList.textContent = name;
+                   parkNames.appendChild(parkNameList);
+                }*/
+             })
         }
 
     });
