@@ -25,12 +25,17 @@ var formHandlerEl = function(event) {
                     var lon = data.data[i].longitude;
                     var lat = data.data[i].latitude;
                     var name = data.data[i].name;
+                    var zipCode = data.data[i].addresses[0].postalCode;
                     var descrip = data.data[i].description;
-                   var parkNames = document.getElementById("park-list");
-                   var parkNameList = document.createElement("div");
-                   parkNameList.textContent = name;
-                   parkNames.appendChild(parkNameList);
-                   
+
+                    var parkNames = document.getElementById("park-list");
+                    var parkNameList = document.createElement("div");
+                    parkNameList.textContent = name;
+                    parkNames.appendChild(parkNameList);
+
+                   var parkLinks = document.createElement("p");
+                   parkLinks.innerHTML = "<a href=https://api.documenu.com/v2/restaurants/" + zipCode + "&key=0d461c352166be6cd4a1a1e0925996b4> Link here </a>";
+                   parkNames.appendChild(parkLinks);
 
                 }
             })
