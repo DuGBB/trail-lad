@@ -33,10 +33,10 @@ var formHandlerEl = function (event) {
                     parkNames.appendChild(parkNameList);
 
                     var parkLinks = document.createElement("p");
-                    parkLinks.innerHTML = "<button>Click me</button>";
+                    parkLinks.innerHTML = "<button data-zipcode = '" + global.zipCode + "'>Click me</button>";
                     parkNames.appendChild(parkLinks);
-                    parkLinks.setAttribute("id", global.zipCode);
-                    document.getElementById("park-description").innerText = descrip;
+                   
+                
 
                 }
             })
@@ -48,9 +48,15 @@ var formHandlerEl = function (event) {
 
     // display results in appropriate list
 }
-var foodHandler = function (event) {
+
+document.getElementById("park-list").addEventListener("click", foodHandler);
+function foodHandler (event) {
+    var button = event.target;
+    var zipCode = button.getAttribute("data-zipcode");
+    console.log(zipCode);
     event.preventDefault();
-    var foodApiUrl = "https://api.documenu.com/v2/restaurants/75052&key=0d461c352166be6cd4a1a1e0925996b4";
+    
+    var foodApiUrl = `https://api.documenu.com/v2/restaurants/zip_code/${zipCode}?size=5&key=0d461c352166be6cd4a1a1e0925996b4`;
     fetch(foodApiUrl).then(function (response) {
             if (response.ok) {
                 response.json().then(function (data) {
@@ -69,4 +75,3 @@ var foodHandler = function (event) {
 // }
 
 document.getElementById("location").addEventListener("submit", formHandlerEl);
-document.getElementById(global.zipCode).addEventListener("onclick", foodHandler);
