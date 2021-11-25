@@ -1,0 +1,17 @@
+:root {
+    --green: #7c8c54;
+    --secondary-color: #
+}
+
+body {
+    background-image: url("/assets/nps-background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 10px 100px;
+    
+}
+
+h1 {
+    background-color: var(--green);
+}
+
