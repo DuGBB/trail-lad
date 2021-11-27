@@ -47,6 +47,24 @@ var formHandlerEl = async function (event) {//added async keyword to formHandler
     });
 }
 
+function dropDownSetup() {
+    var stateInitials = ["AL",
+    "AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"];
+    localStorage["stateAbbr"] = JSON.stringify(stateInitials);
+    var oldDropDown = document.getElementById("location-input");
+    var dropDown = document.createElement("select");
+    dropDown.setAttribute("id", "location-input");
+    dropDown.setAttribute("class", "bg-gray-400 m-2 rounded p-2 font-semibold");
+    for (let index = 0; index < stateInitials.length; index++) {
+        const stateInitialsEl = stateInitials[index];
+        let optionEl = document.createElement("option");
+        optionEl.textContent = stateInitialsEl;
+        optionEl.value = stateInitialsEl;
+        dropDown.appendChild(optionEl);
+    }
+    oldDropDown.parentElement.replaceChild(dropDown, oldDropDown);
+}
+
 async function getRestaurantData(zipCode) {//gets data from foodHandler to display on screen
     var restaurantData = await foodHandler(zipCode);
     displayFoodData(restaurantData);
@@ -100,3 +118,5 @@ async function foodHandler(zipCode) {//using axios(node stuff that we havent lea
 }
 
 document.getElementById("formInput").addEventListener("submit", formHandlerEl);
+
+dropDownSetup();
