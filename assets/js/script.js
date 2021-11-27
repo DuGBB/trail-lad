@@ -1,6 +1,4 @@
-var global = {};
-var formHandlerEl = function (event) {
-    console.log("hello");
+var formHandlerEl = async function (event) {//added async keyword to formHandlerEl function to gicve API URL time to load
     event.preventDefault();
     var cityStateInputEl = document.getElementById("location-input").value;
     // run api call next
@@ -13,27 +11,32 @@ var formHandlerEl = function (event) {
     var diningCheck = document.getElementById("dining-checkmark").checked;
     var lodgingCheck = document.getElementById("lodging-checkmark").checked;
 
-    fetch(parksApiUrl).then(function (response) {
+    fetch(parksApiUrl).then(async function (response) {//added async keyword to anonymous function to allow time for the API to load
         if (response.ok) {
             response.json().then(function (data) {
                 console.log(data.data);
-                for (i = 0; i < 30; i++) {
-                    var name = data.data[i].name;
-                    global.zipCode = data.data[i].addresses[0].postalCode;
-                    var descrip = data.data[i].description;
+                for (i = 0; i < data.data.length; i++) {//using data.data.length instead of hardcoded 30 to eliminate uncaught reference in returns < 30
+                    let name = data.data[i].name;//changed vars to lets to avoid hoisting issues
+                    let zipCode = data.data[i].addresses[0].postalCode;
+                    let descrip = data.data[i].description;
 
-                    var parkNames = document.getElementById("park-list");
-                    var parkNameList = document.createElement("li");
+                    let parkNames = document.getElementById("park-list");
+                    let parkNameList = document.createElement("li");
                     parkNameList.setAttribute("class", "text-xl")
                     parkNameList.setAttribute("class", "font-bold");
                     parkNameList.textContent = name;
                     parkNames.appendChild(parkNameList);
 
-                    var parkLinks = document.createElement("p");
-                    parkLinks.innerHTML = "<button data-zipcode = '" + global.zipCode + "'>Click To See Nearby Dining</button>";
+                    let parkLinks = document.createElement("button");//changed p to button to make it look like a button
+                    parkLinks.innerHTML = "Nearby Dining";
+                    parkLinks.setAttribute("id", name);//added id and class to help style restaurant buttons
+                    parkLinks.setAttribute("class", "bg-gray-400 m-2 rounded p-2 font-semibold");//copied submit button style to make all buttone uniform
+                    parkLinks.addEventListener("click", function () {
+                        getRestaurantData(zipCode);
+                    })
                     parkNames.appendChild(parkLinks);
                    
-                    var parksDescrip = document.createElement("p");
+                    let parksDescrip = document.createElement("p");
                     parksDescrip.innerText = descrip;
                     parkNames.appendChild(parksDescrip);
                 
@@ -44,11 +47,22 @@ var formHandlerEl = function (event) {
     });
 }
 
+async function getRestaurantData(zipCode) {//gets data from foodHandler to display on screen
+    var restaurantData = await foodHandler(zipCode);
+    displayFoodData(restaurantData);
+}
+
 function displayFoodData(foodData) {//created function to display restaurant data to page
     var oldDiningList = document.getElementById("dining-list");//grabbing existing element
     var newDiningList = document.createElement("ul");//creating new element
     newDiningList.setAttribute("id", "dining-list");
     newDiningList.setAttribute("class", "list-container");
+    if (foodData.data.length === 0) {
+        var noData = document.createElement("li");
+        noData.innerHTML = "No Nearby Restaurants";
+        newDiningList.appendChild(noData);
+    }
+
     for (i = 0; i < foodData.data.length; i++) {//displaying individual restaurant data
         let name = foodData.data[i].restaurant_name;
         let address = foodData.data[i].address.formatted;
@@ -56,7 +70,7 @@ function displayFoodData(foodData) {//created function to display restaurant dat
         let webSite = foodData.data[i].restaurant_website;
         let descrip = foodData.data[i].cuisines;
         let infoDiv = document.createElement("div");
-        infoDiv.innerHTML = name + "<br>" + address + "<br>" + number + "<br>" + webSite + "<br>" + descrip;
+        infoDiv.innerHTML = `${name}<br>${address}<br>${number}<br>${webSite}<br>${descrip}<br>`;
         let listItem = document.createElement("li");
         listItem.setAttribute("class", "list-items");
         listItem.appendChild(infoDiv);
@@ -67,27 +81,22 @@ function displayFoodData(foodData) {//created function to display restaurant dat
 }
 
 document.getElementById("park-list").addEventListener("click", foodHandler);
-function foodHandler (event) {
-    var button = event.target;
-    var zipCode = button.getAttribute("data-zipcode");
-    console.log(zipCode);
-    event.preventDefault();
-    
+
+async function foodHandler(zipCode) {//using axios(node stuff that we havent learned in class yet)to call ednPoint API
     var foodApiUrl = `https://api.documenu.com/v2/restaurants/zip_code/${zipCode}?size=5&key=0d461c352166be6cd4a1a1e0925996b4`;
-    fetch(foodApiUrl).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (data) {
-                    console.log(data);
-
-                })
+    return new Promise(function (resolve, reject) {
+        axios.get(foodApiUrl).then(
+            (response) => {
+                var result = response.data;
+                console.log("Processing Restaurant Request");
+                resolve(result);
+                console.log(result);
+            },
+                (error) => {
+                reject(error);
             }
-        }
-
-
-    )
-
-};
-
-
+        );
+    });
+}
 
 document.getElementById("formInput").addEventListener("submit", formHandlerEl);
