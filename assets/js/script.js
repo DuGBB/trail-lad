@@ -24,7 +24,7 @@ var formHandlerEl = async function (event) {//added async keyword to formHandler
                     let zipCode = data.data[i].addresses[0].postalCode;
                     let descrip = data.data[i].description;
                     let parkNameList = document.createElement("li");
-                    parkNameList.setAttribute("class", "text-xl")
+                    parkNameList.setAttribute("class", "text-xl italic")
                     parkNameList.setAttribute("class", "font-bold");
                     parkNameList.textContent = name;
                     parkNames.appendChild(parkNameList);
