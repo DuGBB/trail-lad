@@ -101,4 +101,4 @@ function foodHandler (event) {
 //     console.log(cityStateInputEl)
 // }
 
-document.getElementById("location").addEventListener("submit", formHandlerEl);
+document.getElementById("location-input").addEventListener("submit", formHandlerEl);
