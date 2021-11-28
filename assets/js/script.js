@@ -3,7 +3,7 @@ var formHandlerEl = async function (event) {//added async keyword to formHandler
     var cityStateInputEl = document.getElementById("location-input").value;
     // run api call next
 
-    var parksApiUrl = "https://developer.nps.gov/api/v1/parks?limit=50&start=0&q=" + cityStateInputEl + "&api_key=xG0N7G0NIR00rad6uzGstrePJgkPJ12OyeOMTr9q";
+    var parksApiUrl = "https://developer.nps.gov/api/v1/parks?limit=10&start=0&q=" + cityStateInputEl + "&api_key=xG0N7G0NIR00rad6uzGstrePJgkPJ12OyeOMTr9q";
 
 
     //grabbing the state of the checkboxes no matter if they are checked or unchecked
@@ -15,12 +15,14 @@ var formHandlerEl = async function (event) {//added async keyword to formHandler
         if (response.ok) {
             response.json().then(function (data) {
                 console.log(data.data);
+                var oldParkList = document.getElementById("park-list");//created to avoid apending bug(it didn't reset list of parks when new state was chosen)
+                let parkNames = document.createElement("ul");//moved outside for loop to create list container once, instead of repeatedly
+                parkNames.setAttribute("class", "list-container");//set attributes to style correctly
+                parkNames.setAttribute("id", "park-list");
                 for (i = 0; i < data.data.length; i++) {//using data.data.length instead of hardcoded 30 to eliminate uncaught reference in returns < 30
                     let name = data.data[i].name;//changed vars to lets to avoid hoisting issues
                     let zipCode = data.data[i].addresses[0].postalCode;
                     let descrip = data.data[i].description;
-
-                    let parkNames = document.getElementById("park-list");
                     let parkNameList = document.createElement("li");
                     parkNameList.setAttribute("class", "text-xl")
                     parkNameList.setAttribute("class", "font-bold");
@@ -42,9 +44,38 @@ var formHandlerEl = async function (event) {//added async keyword to formHandler
                 
 
                 }
+                oldParkList.parentElement.replaceChild(parkNames, oldParkList);//resets park list
             })
+        } else {//The NPS API does not return information on Oregon, so I put this here to be able to capture errors and provide feedback to the National Parks API 
+            var errorEvent = localStorage.getItem("Error Event");
+            if (errorEvent === null) {
+                errorEvent = [];
+            } else {
+                errorEvent = JSON.parse(errorEvent);
+            }
+            errorEvent.push(cityStateInputEl);
+            localStorage["stateError"] = JSON.stringify(errorEvent);
+            alert("Due to circumstances beyond our control, we can not display the requested information.")
         }
     });
+}
+
+function dropDownSetup() {//created function to create drop down menu of states instead of using input method
+    var stateInitials = ["AL",
+    "AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"];
+    localStorage["stateAbbr"] = JSON.stringify(stateInitials);
+    var oldDropDown = document.getElementById("location-input");
+    var dropDown = document.createElement("select");
+    dropDown.setAttribute("id", "location-input");
+    dropDown.setAttribute("class", "bg-gray-400 m-2 rounded p-2 font-semibold");
+    for (let index = 0; index < stateInitials.length; index++) {
+        const stateInitialsEl = stateInitials[index];
+        let optionEl = document.createElement("option");
+        optionEl.textContent = stateInitialsEl;
+        optionEl.value = stateInitialsEl;
+        dropDown.appendChild(optionEl);
+    }
+    oldDropDown.parentElement.replaceChild(dropDown, oldDropDown);
 }
 
 async function getRestaurantData(zipCode) {//gets data from foodHandler to display on screen
@@ -100,3 +131,5 @@ async function foodHandler(zipCode) {//using axios(node stuff that we havent lea
 }
 
 document.getElementById("formInput").addEventListener("submit", formHandlerEl);
+
+dropDownSetup();
