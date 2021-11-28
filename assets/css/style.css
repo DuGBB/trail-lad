@@ -1,6 +1,6 @@
 :root {
     --green: #7c8c54;
-    --secondary-color: #
+    --secondary-color: #e7dbbe;
 }
 
 body {
@@ -11,7 +11,15 @@ body {
     
 }
 
+header p {
+    background-color: var(--secondary-color);
+}
+
 h1 {
+    background-color: var(--green);
+}
+
+footer {
     background-color: var(--green);
 }
 
