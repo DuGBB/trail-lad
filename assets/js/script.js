@@ -8,8 +8,8 @@ var formHandlerEl = async function (event) {//added async keyword to formHandler
 
 
     //grabbing the state of the checkboxes no matter if they are checked or unchecked
-    var parkCheck = document.getElementById("park-checkmark").checked;
-    var diningCheck = document.getElementById("dining-checkmark").checked;
+    //var parkCheck = document.getElementById("park-checkmark").checked;
+    //var diningCheck = document.getElementById("dining-checkmark").checked;
     //var lodgingCheck = document.getElementById("lodging-checkmark").checked;
 
     fetch(parksApiUrl).then(async function (response) {//added async keyword to anonymous function to allow time for the API to load
