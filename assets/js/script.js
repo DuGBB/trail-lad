@@ -25,7 +25,7 @@ var formHandlerEl = async function (event) {//added async keyword to formHandler
                     let zipCode = data.data[i].addresses[0].postalCode;
                     let descrip = data.data[i].description;
                     let parkNameList = document.createElement("li");
-                    parkNameList.setAttribute("class", "text-xl")
+                    parkNameList.setAttribute("class", "text-xl italic")
                     parkNameList.setAttribute("class", "font-bold");
                     parkNameList.textContent = name;
                     parkNames.appendChild(parkNameList);
@@ -56,7 +56,14 @@ var formHandlerEl = async function (event) {//added async keyword to formHandler
             }
             errorEvent.push(cityStateInputEl);
             localStorage["stateError"] = JSON.stringify(errorEvent);
-            alert("Due to circumstances beyond our control, we can not display the requested information.")
+            var oldParkList = document.getElementById("park-list");
+            let parkNames = document.createElement("ul");
+            var listItem = document.createElement("li");
+            listItem.innerHTML = "Due to circumstances beyond our control, we can not display the requested information.";
+            parkNames.appendChild(listItem);
+            parkNames.setAttribute("class", "list-container");
+            parkNames.setAttribute("id", "park-list");
+            oldParkList.parentElement.replaceChild(parkNames, oldParkList);
         }
     });
 }
