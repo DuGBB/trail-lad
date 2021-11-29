@@ -109,7 +109,7 @@ function displayFoodData(foodData) {//created function to display restaurant dat
         let webSite = foodData.data[i].restaurant_website;
         let descrip = foodData.data[i].cuisines;
         let infoDiv = document.createElement("div");
-        infoDiv.innerHTML = `${name}<br>${address}<br>${number}<br>${webSite}<br>${descrip}<br>`;
+        infoDiv.innerHTML = `<strong>${name}</strong><br>${address}<br>${number}<br><a href=${webSite}>Visit Website</a><br>${descrip}<br>`;
         let listItem = document.createElement("li");
         listItem.setAttribute("class", "list-items");
         listItem.appendChild(infoDiv);
