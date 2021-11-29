@@ -1,5 +1,6 @@
 var formHandlerEl = async function (event) {//added async keyword to formHandlerEl function to gicve API URL time to load
     event.preventDefault();
+    restFoodData();
     var cityStateInputEl = document.getElementById("location-input").value;
     // run api call next
 
@@ -7,9 +8,9 @@ var formHandlerEl = async function (event) {//added async keyword to formHandler
 
 
     //grabbing the state of the checkboxes no matter if they are checked or unchecked
-    var parkCheck = document.getElementById("park-checkmark").checked;
-    var diningCheck = document.getElementById("dining-checkmark").checked;
-    var lodgingCheck = document.getElementById("lodging-checkmark").checked;
+    //var parkCheck = document.getElementById("park-checkmark").checked;
+    //var diningCheck = document.getElementById("dining-checkmark").checked;
+    //var lodgingCheck = document.getElementById("lodging-checkmark").checked;
 
     fetch(parksApiUrl).then(async function (response) {//added async keyword to anonymous function to allow time for the API to load
         if (response.ok) {
@@ -55,7 +56,14 @@ var formHandlerEl = async function (event) {//added async keyword to formHandler
             }
             errorEvent.push(cityStateInputEl);
             localStorage["stateError"] = JSON.stringify(errorEvent);
-            alert("Due to circumstances beyond our control, we can not display the requested information.")
+            var oldParkList = document.getElementById("park-list");
+            let parkNames = document.createElement("ul");
+            var listItem = document.createElement("li");
+            listItem.innerHTML = "Due to circumstances beyond our control, we can not display the requested information.";
+            parkNames.appendChild(listItem);
+            parkNames.setAttribute("class", "list-container");
+            parkNames.setAttribute("id", "park-list");
+            oldParkList.parentElement.replaceChild(parkNames, oldParkList);
         }
     });
 }
@@ -112,6 +120,14 @@ function displayFoodData(foodData) {//created function to display restaurant dat
 }
 
 document.getElementById("park-list").addEventListener("click", foodHandler);
+
+function restFoodData() {
+    var oldFoodData = document.getElementById("dining-list");
+    var newFoodData = document.createElement("ul");
+    newFoodData.setAttribute("id", "dining-list");
+    newFoodData.setAttribute("class", "list-container");
+    oldFoodData.parentElement.replaceChild(newFoodData, oldFoodData);
+}
 
 async function foodHandler(zipCode) {//using axios(node stuff that we havent learned in class yet)to call ednPoint API
     var foodApiUrl = `https://api.documenu.com/v2/restaurants/zip_code/${zipCode}?size=5&key=0d461c352166be6cd4a1a1e0925996b4`;
